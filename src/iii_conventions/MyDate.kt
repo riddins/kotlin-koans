@@ -20,6 +20,13 @@ enum class TimeInterval {
     WEEK,
     YEAR
 }
+operator fun TimeInterval.times(i: Int) = TimeIntervals(this, i)
+
+data class TimeIntervals(val ti: TimeInterval, val num: Int) {}
+
+operator fun MyDate.plus(ti: TimeInterval) = this + TimeIntervals(ti, 1)
+operator fun MyDate.plus(ti: TimeIntervals) = addTimeIntervals(ti.ti, ti.num)
+
 
 class DateRange(val start: MyDate, val endInclusive: MyDate): Iterable<MyDate> {
 
